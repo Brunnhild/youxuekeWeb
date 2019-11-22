@@ -43,7 +43,7 @@ create table reply_liker (reply int, liker varchar(20));
 
 create table topic_liker (topic int, liker varchar(20));
 
-create table user (open_id varchar(50)  , ID varchar(15) primary key, name varchar(20), identity int, password varchar(65), avatar varchar(100));
+create table user (open_id varchar(50)  , ID varchar(15) primary key, name varchar(20), identity int, password varchar(65), avatar varchar(500));
 -- create table user (open_id varchar(50) primary key , ID varchar(15), name varchar(20), identity int);
 
 create table question (description varchar (10000), id int auto_increment primary key);

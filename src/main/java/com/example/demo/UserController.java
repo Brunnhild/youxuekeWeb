@@ -114,7 +114,7 @@ public class UserController {
         return jdbcTemplate.update(sql, param.get("stuId"), param.get("name"), open_id) > 0;
     }
 
-
+/*
     @PostMapping("/login")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, Object> param) throws DataAccessException {
@@ -144,7 +144,8 @@ public class UserController {
         return tmpMP;
     }
 }
-/*
+*/
+
     @PostMapping("/login")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, Object> param) throws DataAccessException {
@@ -180,7 +181,9 @@ public class UserController {
     @PostMapping("/uploadAvatar")
     @ResponseBody
     public boolean uploadAvatar(@RequestBody Map<String, Object> param) throws Exception {
-        PictureManager.download((String) param.get("url"), (String) param.get("stuId"), "userAvatar");
+//        PictureManager.download((String) param.get("url"), (String) param.get("stuId"), "userAvatar");
+        String s = "UPDATE user SET avatar=? WHERE ID=?";
+        jdbcTemplate.update(s, param.get("url"), param.get("stuId"));
         return true;
     }
 
@@ -192,4 +195,4 @@ public class UserController {
 
 
 }
-*/
+
