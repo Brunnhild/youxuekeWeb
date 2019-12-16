@@ -48,7 +48,7 @@ create table user (open_id varchar(50)  , ID varchar(15) primary key, name varch
 
 create table question (description varchar (10000), id int auto_increment primary key);
 
-create table answer (description varchar (20000), queId int primary key, isRight boolean);
+create table answer (description varchar (16380), queId int primary key, isRight boolean);
 
 -- 1 for student; 2 for student lecturer; 3 for administrator
 insert into user value
