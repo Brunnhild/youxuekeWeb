@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -58,6 +59,7 @@ class Entry {
 
 @RestController
 @RequestMapping("/topic")
+@Slf4j
 public class TopicController {
     List<Entry> list = new ArrayList<>();
     private final JdbcTemplate jdbcTemplate;
@@ -93,7 +95,7 @@ public class TopicController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Topic.class), param.get("topicId"));
         } catch (DataAccessException e) {
-            System.out.println("No such topic. ");
+            log.info("No such topic. ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");
@@ -197,7 +199,7 @@ public class TopicController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new Object[]{param.get("topicId")}, Integer.class);
         } catch (DataAccessException e) {
-            System.out.println("Failure, cannot find this topic_id ");
+            log.info("Failure, cannot find this topic_id ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");
@@ -219,7 +221,7 @@ public class TopicController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new Object[]{param.get("topicId")}, Integer.class);
         } catch (DataAccessException e) {
-            System.out.println("Failure, cannot find this topic_id ");
+            log.info("Failure, cannot find this topic_id ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");

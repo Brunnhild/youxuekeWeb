@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -32,6 +33,7 @@ class Reply_Liker {
 
 @RestController
 @RequestMapping("/reply")
+@Slf4j
 public class ReplyController {
     private final JdbcTemplate jdbcTemplate;
 
@@ -114,7 +116,7 @@ public class ReplyController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new Object[]{param.get("replyId")}, Integer.class);
         } catch (DataAccessException e) {
-            System.out.println("Failure, cannot find this reply_id ");
+            log.info("Failure, cannot find this reply_id ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");

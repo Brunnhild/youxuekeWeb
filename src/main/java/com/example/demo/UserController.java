@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -56,6 +57,7 @@ class userInfo {
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     private final JdbcTemplate jdbcTemplate;
 
@@ -90,7 +92,7 @@ public class UserController {
         try {
             result = jdbcTemplate.queryForObject(sql, new Object[]{param.get("stuId")}, new BeanPropertyRowMapper<>(User.class));
         } catch(DataAccessException e) {
-            System.out.println("Query for user " + param.get("stuId") + " failed! ");
+            log.info("Query for user " + param.get("stuId") + " failed! ");
             e.printStackTrace();
         } finally {
             if (result == null) {
@@ -157,7 +159,7 @@ public class UserController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new Object[]{open_id}, new BeanPropertyRowMapper<>(userInfo.class));
         } catch (DataAccessException e) {
-            System.out.println("An unregistered user tried to login. ");
+            log.info("An unregistered user tried to login. ");
         } finally {
 
             if (tmp == null) {

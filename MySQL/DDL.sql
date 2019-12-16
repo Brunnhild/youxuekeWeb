@@ -2,7 +2,7 @@ use stu;
 
 drop table if exists booking;
 drop table if exists course;
-drop table if exists re1ease;
+drop table if exists `release`;
 drop table if exists reply;
 drop table if exists topic;
 drop table if exists reply_liker;
@@ -15,7 +15,7 @@ create table booking (stuId varchar(20), courseId int, phone varchar(20));
 
 create table course (id int auto_increment primary key, title varchar(50), des varchar(200),lecturer varchar(20), date varchar(50), location varchar(50), verification int, category varchar(50),phone varchar(20), trueName varchar(50));
 
-create table re1ease (teaId varchar(20), courseId int, phone varchar(20), trueName varchar(50));
+create table `release` (teaId varchar(20), courseId int, phone varchar(20), trueName varchar(50));
 
 -- the field likes changed to type, added date and oldCommenter fields
 create table reply (
@@ -49,3 +49,18 @@ create table user (open_id varchar(50)  , ID varchar(15) primary key, name varch
 create table question (description varchar (10000), id int auto_increment primary key);
 
 create table answer (description varchar (20000), queId int primary key, isRight boolean);
+
+-- 1 for student; 2 for student lecturer; 3 for administrator
+insert into user value
+('', '10111', '张三', 1, '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', ''),
+('', '10222', '李四', 2, '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', ''),
+('', '10333', '管理员', 3, '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090', '');
+
+insert into course(title, des, lecturer, date, location, verification, category, phone, trueName) value
+('高等数学', '高等数学A第一章', '10222', '2019-12-20 15:30', '文史楼302', 0, '1', '13033233323', '李四'),
+('离散数学', '生成函数求解递推式', '10222', '2019-12-22 11:30', '文史楼202', 1, '0', '133333333', '李四'),
+('线性代数', '线性代数总结复习', '10111', '2019-12-21 14:30', '理科大楼222', 0, '1', '155666666', '张三'),
+('程序设计', 'EOJ1234', '10222', '2019-12-25 09:30', '教书院234', 1, '0', '13033233323', '李四'),
+('网页设计', 'VUE初探', '10111', '2019-12-19 08:30', '文史楼303', 1, '1', '13033233323', '张三'),
+('数值优化', 'ADMM的实际应用', '10222', '2019-12-30 17:30', '文史楼101', 0, '0', '13033233323', '李四'),
+('机器学习', 'TSVM实例', '10111', '2019-12-31 20:30', '文史楼305', 1, '1', '13033233323', '张三');

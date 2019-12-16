@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/course")
+@Slf4j
 public class CourseController {
     private final JdbcTemplate jdbcTemplate;
 
@@ -44,7 +46,7 @@ public class CourseController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Course.class), param.get("courseId"));
         } catch (DataAccessException e) {
-            System.out.println("No such course. ");
+            log.info("No such course. ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");

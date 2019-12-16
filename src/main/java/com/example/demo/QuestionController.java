@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/question")
+@Slf4j
 public class QuestionController {
     private final JdbcTemplate jdbcTemplate;
 
@@ -46,7 +48,7 @@ public class QuestionController {
         try {
             tmp = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Question.class), param.get("questionId"));
         } catch (DataAccessException e) {
-            System.out.println("No such question. ");
+            log.info("No such question. ");
         } finally {
             if (tmp == null) {
                 tmpMP.put("status", "false");
