@@ -116,7 +116,7 @@ public class UserController {
         return jdbcTemplate.update(sql, param.get("stuId"), param.get("name"), open_id) > 0;
     }
 
-/*
+
     @PostMapping("/login")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, Object> param) throws DataAccessException {
@@ -145,9 +145,9 @@ public class UserController {
         }
         return tmpMP;
     }
-}
-*/
 
+
+/*
     @PostMapping("/login")
     @ResponseBody
     public Map<String, Object> login(@RequestBody Map<String, Object> param) throws DataAccessException {
@@ -171,7 +171,7 @@ public class UserController {
         }
         return tmpMP;
     }
-
+*/
 //    @PostMapping("/login")
 //    public userInfo login(@RequestParam("code") String js_code) {
 //        WXController controller = new WXController();
