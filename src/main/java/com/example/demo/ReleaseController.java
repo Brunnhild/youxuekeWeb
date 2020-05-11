@@ -21,7 +21,7 @@ public class ReleaseController {
 
     @PostMapping("/list")
     public Map<String, Object> queryReleases() {
-        String sql = "select * from re1ease";
+        String sql = "select * from release";
         List<Release> tmp;
         tmp = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<>(Release.class));
         Map<String, Object> tmpMP = new HashMap<>();
@@ -37,7 +37,7 @@ public class ReleaseController {
     @PostMapping("/findCourseByTea")
     @ResponseBody
     public Map<String, Object> findCourseByTea(@RequestBody Map<String, Object> param) {
-        String sql = "select * from course, re1ease where course.id = re1ease.courseId and re1ease.teaId = ?";
+        String sql = "select * from course, release where course.id = release.courseId and release.teaId = ?";
         List<Course> tmp;
         Map<String, Object> tmpMP = new HashMap<>();
         tmp = jdbcTemplate.query(sql, new Object[]{param.get("stuId")}, new BeanPropertyRowMapper<>(Course.class));
@@ -53,20 +53,20 @@ public class ReleaseController {
 
 //    @PostMapping("/findCourseByTea")
 //    public List<Course> findCourseByStu(@RequestParam("teaId") String teaId) {
-//        String sql = "select * from course, re1ease where course.id = re1ease.courseId and re1ease.teaId = ?";
+//        String sql = "select * from course, release where course.id = release.courseId and release.teaId = ?";
 //        return jdbcTemplate.query(sql,new Object[]{teaId}, new BeanPropertyRowMapper<>(Course.class));
 //    }
 
     @PostMapping("/add")
     @ResponseBody
     public boolean addRelease(@RequestBody Map<String, Object> param) {
-        String sql = "insert into re1ease(teaId, courseId, phone,trueName) values(?,?,?,?)";
+        String sql = "insert into release(teaId, courseId, phone,trueName) values(?,?,?,?)";
         return jdbcTemplate.update(sql, param.get("stuId"), param.get("courseId"), param.get("phone"), param.get("trueName")) > 0;
     }
 
 //    @PostMapping("/add")
 //    public boolean addRelease(@RequestParam("teaId") String teaId, @RequestParam("courseId") int courseId, @RequestParam("phone") String phone) {
-//        String sql = "insert into re1ease(teaId, courseId, phone) values(?,?,?)";
+//        String sql = "insert into release(teaId, courseId, phone) values(?,?,?)";
 //        return jdbcTemplate.update(sql, teaId, courseId, phone) > 0;
 //    }
 }
